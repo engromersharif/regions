@@ -18,7 +18,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(ggplot2)
 library(plotly)
@@ -31,24 +31,24 @@ library(readxl)
 # Induct In Ethanol Excel Sheet
 Main <- read_excel("C:/Users/omer.sharif/Desktop/Office Computer/Capstone/R Codes/Ethanol Dashboard/Jun 2021/Main.xlsm")
 
-
 ```
 
 
 # INTERACTIVE REPORT
 
 * Hover of the mouse _highlights "Date","Price", and "Region"_. 
-* `Colours` represent different _Regions_.
+* `Colours` represent different _Products_.
 
-```{r products,echo=FALSE,fig.align='center',fig.width=10,fig.height=5}
+```{r products,echo=FALSE,fig.align='center',fig.width=12,fig.height=5}
 
-REGION <- as.factor(Main$REGION)
-p <- ggplot(data=Main,aes(x= DATE ,y=`M.Ton Price`,fill=REGION))
-p <- p + geom_point(alpha=0.3) + geom_jitter(alpha=0.3) +
-  theme(legend.position = "top",plot.title=element_text(hjust=0.5)) + labs(title="ETHANOL PRICES PER METRIC TON - YEAR 2017 TO 2021",x="",y="")
-p <- p + facet_grid(.~Product) + scale_fill_viridis_d() + guides(fill="none") 
-p <- ggplotly(p) 
+Product <- as.factor(Main$Product)
+p <- ggplot(data=Main,aes(x= DATE,y=`M.Ton Price`,fill=Product))
+p <- p + geom_point(alpha=0.4) + geom_jitter(alpha=0.4) + 
+  theme(legend.position = "",plot.title=element_text(hjust=0.5)) + labs(title="REGION WISE ETHANOL PRICES PER METRIC TON - YEAR 2017 TO 2021",x="",y="") 
+p <- p + facet_grid(.~REGION) + scale_fill_viridis_d()
+p <- ggplotly(p)
 hide_legend(p) %>% config(displaylogo = FALSE) %>%  config(displayModeBar = FALSE) 
+
 ```
 
 ### DATA SUMMARY BY YEAR
@@ -59,11 +59,11 @@ hide_legend(p) %>% config(displaylogo = FALSE) %>%  config(displayModeBar = FALS
 
 
 ```{r,message= FALSE}
-Product_count <- Main %>% group_by(Year,Product,REGION) %>%
+Region_count <- Main %>% group_by(Year,REGION,Product) %>%
 summarise(Obs=n(),`Maximum Price`= round(max(`M.Ton Price`),2),`Minimum Price`=round(min(`M.Ton Price`),2))
-Product_count <- Product_count %>% arrange(desc(Year),desc(Product))
+Region_count <- Region_count %>% arrange(desc(Year),desc(REGION),desc(Obs))
 
-datatable(Product_count)
+datatable(Region_count)
 
 ```
 
