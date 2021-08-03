@@ -34,6 +34,12 @@ Main <- read_excel("C:/Users/omer.sharif/Desktop/Office Computer/Capstone/R Code
 ```
 
 
+```{r echo=FALSE,out.width='100%'}
+
+knitr::include_graphics('./img/logo.jpg')
+
+```
+
 # INTERACTIVE REPORT
 
 * Hover of the mouse _highlights "Date","Price", and "Region"_. 
