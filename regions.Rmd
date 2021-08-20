@@ -6,7 +6,7 @@ knit: (function(input_file, encoding) {
  encoding=encoding,
  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 author: "Omer Sharif"
-date: "7/27/2021"
+date: "8/20/2021"
 output: 
  rmarkdown::html_document:
   theme: journal
