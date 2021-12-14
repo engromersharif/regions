@@ -5,8 +5,8 @@ knit: (function(input_file, encoding) {
   rmarkdown::render(input_file,
  encoding=encoding,
  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
-author: "Omer Sharif"
-date: "8/20/2021"
+author: "OS"
+date: "Dec-2021"
 output: 
  rmarkdown::html_document:
   theme: journal
@@ -29,7 +29,7 @@ library(DT)
 library(readxl)
 
 # Induct In Ethanol Excel Sheet
-Main <- read_excel("C:/Users/omer.sharif/Desktop/Office Computer/Capstone/R Codes/Ethanol Dashboard/Aug 2021/Main.xlsm")
+Main <- read_excel("C:/Users/omer.sharif/Desktop/Office Computer/Capstone/R Codes/Ethanol Dashboard/Oct 2021/Main.xlsm")
 
 ```
 
